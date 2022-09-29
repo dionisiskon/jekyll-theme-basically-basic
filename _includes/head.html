@@ -4,28 +4,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" href="favicon.ico">
 
-  <link rel="stylesheet" href="{{ '/assets/stylesheets/main.css' | relative_url }}" id="theme_source">
-  {% if site.data.theme.skin2 %}
-    <link rel="stylesheet alternate" href="{{ '/assets/stylesheets/theme2.css' | relative_url }}" id="theme_source_2">
-    <script>
-      let theme = sessionStorage.getItem('theme');
-      if (theme === "dark") {
-        sessionStorage.setItem('theme', 'dark');
-        node1 = document.getElementById('theme_source');
-        node2 = document.getElementById('theme_source_2');
-        node1.setAttribute('rel', 'stylesheet alternate');
-        node2.setAttribute('rel', 'stylesheet');
-    }
-    else {
-      sessionStorage.setItem('theme', 'light');
-    }
-</script>
-{% endif %}
-<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style"
-  onload="this.onload=null;this.rel='stylesheet'">
-<noscript>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
-</noscript>
   {% if site.plugins contains 'jekyll-seo-tag' or site.gems contains 'jekyll-seo-tag' %}
     {% comment %}
       Add metadata for search engines and social networks if jekyll-seo-tag plugin is enabled
@@ -54,6 +32,36 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css" integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ==" crossorigin=""/>
   <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' rel='stylesheet' />
   {%- endif -%}
+
+  <!-- For all browsers -->
+<link rel="stylesheet" href="{{ '/assets/stylesheets/main.css' | relative_url }}" id="theme_source">
+{% if site.data.theme.skin2 %}
+<link rel="stylesheet alternate" href="{{ '/assets/stylesheets/theme2.css' | relative_url }}" id="theme_source_2">
+<script>
+  let theme = sessionStorage.getItem('theme');
+  if (theme === "dark") {
+    sessionStorage.setItem('theme', 'dark');
+    node1 = document.getElementById('theme_source');
+    node2 = document.getElementById('theme_source_2');
+    node1.setAttribute('rel', 'stylesheet alternate');
+    node2.setAttribute('rel', 'stylesheet');
+  }
+  else {
+    sessionStorage.setItem('theme', 'light');
+  }
+</script>
+{% endif %}
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style"
+  onload="this.onload=null;this.rel='stylesheet'">
+<noscript>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+</noscript>
+
+{% if site.head_scripts %}
+{% for script in site.head_scripts %}
+<script src="{{ script | relative_url }}"></script>
+{% endfor %}
+{% endif %}
 
   {% if site.plugins contains 'jekyll-feed' or site.gems contains 'jekyll-feed'%}
     {% comment %}
