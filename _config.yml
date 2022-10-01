@@ -42,7 +42,7 @@ plugins: # previsously gems
   - jekyll-feed
   - jekyll-seo-tag
   - jekyll-sitemap
-  - jekyll-paginate
+  - jekyll-paginate-v2
 feed:
   path: atom.xml
 
